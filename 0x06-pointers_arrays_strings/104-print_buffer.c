@@ -1,35 +1,51 @@
+#include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
 /**
- * main - program that generates random valid
- * passwords for the program 101-crackme
- *
- * Return: Always 0 (Success)
+ * print_buffer - prints buffer
+ * @b: buffer
+ * @size: size
+ * Return: void
  */
-int main(void)
+
+void print_buffer(char *b, int size)
 {
-	int pass[100];
-	int i, sum, n;
+	int o, j, i;
 
-	sum = 0;
+	o = 0;
 
-	srand(time(NULL));
-
-	for (i = 0; i < 100; i++)
+	if (size <= 0)
 	{
-		pass[i] = rand() % 78;
-		sum += (pass[i] + '0');
-		putchar(pass[i] + '0');
-		if ((2772 - sum) - '0' < 78)
-		{
-			n = 2772 - sum - '0';
-			sum += n;
-			putchar(n + '0');
-			break;
-		}
+		printf("\n");
+		return;
 	}
+	while (o < size)
+	{
+		j = size - o < 10 ? size - o : 10;
+		printf("%08x: ", o);
+		for (i = 0; i < 10; i++)
+		{
+			if (i < j)
+				printf("%02x", *(b + o + i));
+			else
+				printf("  ");
+			if (i % 2)
+			{
+				printf(" ");
+			}
+		}
+		for (i = 0; i < j; i++)
+		{
+			int c = *(b + o + i);
 
-	return (0);
+			if (c < 32 || c > 132)
+			{
+				c = '.';
+			}
+			printf("%c", c);
+		}
+		printf("\n");
+		o += 10;
+	}
 }
+
