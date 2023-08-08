@@ -8,3 +8,4 @@ ar rcs liball.a *.o
 
 # clean up by removing the object files
 rm -f *.o
+
