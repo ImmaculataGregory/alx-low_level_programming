@@ -1,22 +1,18 @@
 #include "main.h"
 
 /**
- * print_binary - prints the binary equivalent of a decimal number
- * @n: number to print in binary
+ * get_bit - Returns values of a bit at specified index in a decimal number.
+ * @n: The decimal number.
+ * @index: The index of the bit (0-based).
+ *
+ * Return: The value of bit at the given index, or -1 if index is out of range.
  */
-void print_binary(unsigned long int n)
+int get_bit(unsigned long int n, unsigned int index)
 {
-	int i;
-	unsigned long int mask = 1UL << 63;
+	if (index >= sizeof(unsigned long int) * 8)
+		return (-1);
 
-	for (i = 0; i < 64; i++)
-	{
-		if ((n & mask) || i == 63)
-			_putchar('1');
-		else
-			_putchar('0');
-
-		mask >>= 1;
-	}
+	return ((n >> index) & 1);
 }
+
 
